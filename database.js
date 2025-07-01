@@ -30,6 +30,15 @@ db.serialize(() => {
   });
 });
 
+db.run(`
+  CREATE TABLE IF NOT EXISTS logins (
+    id CHAR(12) PRIMARY KEY,
+    userId CHAR(12) NOT NULL,
+    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+    ip TEXT
+  )
+`);
+
 // 生成一个 12 字符的随机 ID（你之后注册时可使用这个函数）
 function generateId() {
   return crypto.randomBytes(6).toString('hex'); // 6 bytes = 12 hex characters
